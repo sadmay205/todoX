@@ -1,0 +1,266 @@
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+
+/* 1. Cấu hình Dark Mode */
+@custom-variant dark (&:is(.dark *));
+
+/* 2. Cấu hình Theme (Thay thế tailwind.config.js) */
+@theme {
+  /* Khai báo màu sắc từ biến */
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-card-shadow: var(--card-shadow);
+
+  --color-sidebar: var(--sidebar-background);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Background Images (Gradients) */
+  --background-image-gradient-primary: var(--gradient-primary);
+  --background-image-gradient-background: var(--gradient-background);
+  --background-image-gradient-card: var(--gradient-card);
+
+  /* Box Shadows */
+  --shadow-custom-sm: var(--shadow-sm);
+  --shadow-custom-md: var(--shadow-md);
+  --shadow-custom-lg: var(--shadow-lg);
+  --shadow-glow: var(--shadow-glow);
+
+  /* Border Radius */
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  /* Transitions */
+  --transition-property-smooth: var(--transition-smooth);
+  --transition-property-bounce: var(--transition-bounce);
+
+  /* Animations (Khai báo tên và thời gian chạy) */
+  --animate-fade-in: fade-in 0.5s ease-out;
+  --animate-fade-out: fade-out 0.5s ease-out;
+  --animate-scale-in: scale-in 0.5s ease-out;
+  --animate-slide-up: slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Keyframes (Định nghĩa chuyển động) */
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-out {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  }
+  @keyframes scale-in {
+    0% {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes slide-up {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+/* 3. Cấu hình Container (Thay thế theme.container) */
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+  @media (width >= 1400px) {
+    max-width: 1400px;
+  }
+}
+
+/* 4. Khai báo biến CSS (Đã bọc sẵn hsl() để chuẩn v4) */
+@layer base {
+  :root {
+    --background: hsl(240 10% 98%);
+    --background-secondary: hsl(245 15% 96%);
+    --foreground: hsl(215 28% 27%);
+
+    --card: hsl(0 0% 100%);
+    --card-foreground: hsl(215 28% 27%);
+    --card-shadow: hsl(218 36% 18%);
+
+    --popover: hsl(0 0% 100%);
+    --popover-foreground: hsl(215 28% 27%);
+
+    --primary: hsl(258 89% 65%);
+    --primary-light: hsl(255 92% 76%);
+    --primary-dark: hsl(263 69% 50%);
+    --primary-foreground: hsl(0 0% 100%);
+
+    --secondary: hsl(240 5% 96%);
+    --secondary-foreground: hsl(240 6% 10%);
+
+    --muted: hsl(240 5% 96%);
+    --muted-foreground: hsl(215 18% 47%);
+
+    --accent: hsl(204 94% 94%);
+    --accent-foreground: hsl(204 100% 40%);
+
+    --destructive: hsl(0 85% 60%);
+    --destructive-foreground: hsl(0 0% 98%);
+
+    --success: hsl(142 76% 36%);
+    --success-foreground: hsl(0 0% 98%);
+
+    --info: hsl(226 100% 63%);
+    --info-foreground: hsl(0 0% 100%); /* Giả định màu chữ trắng cho info */
+
+    --border: hsl(214 32% 91%);
+    --input: hsl(210 40% 96%);
+    --ring: hsl(258 89% 65%);
+
+    --radius: 0.5rem;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(
+      135deg,
+      hsl(255 92% 76%) 0%,
+      hsl(263 69% 50%) 100%
+    );
+    --gradient-background: linear-gradient(
+      135deg,
+      hsl(240 10% 98%) 0%,
+      hsl(245 15% 96%) 100%
+    );
+    --gradient-card: linear-gradient(
+      135deg,
+      hsl(0 0% 100%) 0%,
+      hsl(240 10% 99%) 100%
+    );
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(218 36% 18% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(218 36% 18% / 0.1),
+      0 2px 4px -2px hsl(218 36% 18% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(218 36% 18% / 0.1),
+      0 4px 6px -4px hsl(218 36% 18% / 0.1);
+    --shadow-glow: 0 0 20px hsl(258 89% 65% / 0.3);
+
+    /* Transition Props */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* Sidebar Variables */
+    --sidebar-background: hsl(0 0% 98%);
+    --sidebar-foreground: hsl(240 5.3% 26.1%);
+    --sidebar-primary: hsl(240 5.9% 10%);
+    --sidebar-primary-foreground: hsl(0 0% 98%);
+    --sidebar-accent: hsl(240 4.8% 95.9%);
+    --sidebar-accent-foreground: hsl(240 5.9% 10%);
+    --sidebar-border: hsl(220 13% 91%);
+    --sidebar-ring: hsl(217.2 91.2% 59.8%);
+  }
+
+  .dark {
+    --background: hsl(222.2 84% 4.9%);
+    --foreground: hsl(210 40% 98%);
+
+    --card: hsl(222.2 84% 4.9%);
+    --card-foreground: hsl(210 40% 98%);
+
+    --popover: hsl(222.2 84% 4.9%);
+    --popover-foreground: hsl(210 40% 98%);
+
+    --primary: hsl(210 40% 98%);
+    --primary-foreground: hsl(222.2 47.4% 11.2%);
+
+    --secondary: hsl(217.2 32.6% 17.5%);
+    --secondary-foreground: hsl(210 40% 98%);
+
+    --muted: hsl(217.2 32.6% 17.5%);
+    --muted-foreground: hsl(215 20.2% 65.1%);
+
+    --accent: hsl(217.2 32.6% 17.5%);
+    --accent-foreground: hsl(210 40% 98%);
+
+    --destructive: hsl(0 62.8% 30.6%);
+    --destructive-foreground: hsl(210 40% 98%);
+
+    --border: hsl(217.2 32.6% 17.5%);
+    --input: hsl(217.2 32.6% 17.5%);
+    --ring: hsl(212.7 26.8% 83.9%);
+
+    --sidebar-background: hsl(240 5.9% 10%);
+    --sidebar-foreground: hsl(240 4.8% 95.9%);
+    --sidebar-primary: hsl(224.3 76.3% 48%);
+    --sidebar-primary-foreground: hsl(0 0% 100%);
+    --sidebar-accent: hsl(240 3.7% 15.9%);
+    --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
+    --sidebar-border: hsl(240 3.7% 15.9%);
+    --sidebar-ring: hsl(217.2 91.2% 59.8%);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
